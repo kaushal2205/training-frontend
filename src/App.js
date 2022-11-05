@@ -1,23 +1,51 @@
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrash, faPlus, faEdit, faCamera, faList} from "@fortawesome/free-solid-svg-icons";
+
+import Navbar from './Components/Navbar';
+import Dashboard from './Components/Dashboard';
+import Login from './Components/Login';
+import Register from './Components/Register';
+import Logout from './Components/Logout.js';
+import ViewLoans from './Components/ViewLoans';
+import ViewItems from './Components/ViewItems';
+import ApplyLoan from './Components/ApplyLoan';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+// import AuthenticatedRoute from './components/AuthenticatedRoute';
+
+
+library.add(faTrash, faEdit, faPlus, faCamera, faList);
+
+//npm install react-router-dom@5 to install 
+/*
+npm i --save @fortawesome/fontawesome-svg-core
+npm i --save @fortawesome/free-solid-svg-icons
+npm i --save @fortawesome/react-fontawesome
+*/
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Navbar/>
+        <div className='container'>
+        <Switch>
+          <Route exact path='/dashboard' component={Dashboard}></Route>
+          <Route exact path='/login' component={Login}></Route>  
+          <Route exact path='/register' component={Register}></Route>
+          <Route exact path='/dashboard/viewLoans' component={ViewLoans}></Route>  
+          <Route exact path='/dashboard/viewItems' component={ViewItems}></Route>  
+          <Route exact path='/dashboard/applyLoan' component={ApplyLoan}></Route>  
+
+          {/* <AuthenticatedRoute path='/logout' component={Logout}/>  */}
+        </Switch>
+        </div>
+      </Router>
     </div>
   );
 }
