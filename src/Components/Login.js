@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-
+import './login.css';
 import AuthenticationService from "../Services/AuthenticationService";
 
 const required = (value) => {
@@ -70,9 +70,10 @@ export default class Login extends Component{
     render(){
         return(
             <div>
-                <h1>Employee Login</h1>
+                
                 <div className="container">
-                    <form>
+                    <form className="form-signin">
+                    <h1 className="form-signin-heading">Employee Login</h1>
                     {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid Credentials</div>}
                     {this.state.showSuccessMessage && <div>Login Sucessful</div>}
                     <div className = "form-group">
@@ -85,7 +86,10 @@ export default class Login extends Component{
                     <input type="password" name="password" className="form-control" value={this.state.password}
                         onChange={this.handleChange} validations={[required]}/>
                     </div>
-                    <button className="btn btn-success" onClick={this.checkLogin}>Login</button>
+                    <button className="btn btn-lg btn-success" onClick={this.checkLogin}>Login</button>
+                     <div className="form-group">
+                        Cannot log-in? <a href="/register">Register</a>
+                     </div>
                     </form>
                 </div>
             </div>
