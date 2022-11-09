@@ -1,0 +1,16 @@
+.ViewLoans-main{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.ViewLoans-header{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.ViewLoans-header-item{
+
+}

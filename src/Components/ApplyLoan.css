@@ -1,0 +1,22 @@
+.apply-loan-main{
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+    padding: 0 13rem;
+}
+
+.apply-loan-row{
+    display: flex;
+    justify-content: space-around;
+}
+
+.form-group{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.apply-loan-row-label{
+    text-align: left;
+}
