@@ -69,27 +69,28 @@ export default class Login extends Component{
 
     render(){
         return(
-            <div>
-                
+            <div> 
                 <div className="container">
                     <form className="form-signin">
                     <h1 className="form-signin-heading">Employee Login</h1>
                     {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid Credentials</div>}
                     {this.state.showSuccessMessage && <div>Login Sucessful</div>}
-                    <div className = "form-group">
-                        <label>User Name:</label>  
-                        <input type="text" name="email" className="form-control" value={this.state.email}
-                        onChange={this.handleChange} validations={[required]} />
+                    <div className="form-register-main">
+                        <div className = "form-group">
+                            <label>User Name:</label>  
+                            <input type="text" name="email" className="form-control" value={this.state.email}
+                            onChange={this.handleChange} validations={[required]} />
+                        </div>
+                        <div className = "form-group">
+                        <label>Password:</label>
+                        <input type="password" name="password" className="form-control" value={this.state.password}
+                            onChange={this.handleChange} validations={[required]}/>
+                        </div>
+                        <button className="btn btn-lg btn-success" onClick={this.checkLogin}>Login</button>
+                        <div className="form-group">
+                            Cannot log-in? <a href="/register">Register</a>
+                        </div>
                     </div>
-                    <div className = "form-group">
-                    <label>Password:</label>
-                    <input type="password" name="password" className="form-control" value={this.state.password}
-                        onChange={this.handleChange} validations={[required]}/>
-                    </div>
-                    <button className="btn btn-lg btn-success" onClick={this.checkLogin}>Login</button>
-                     <div className="form-group">
-                        Cannot log-in? <a href="/register">Register</a>
-                     </div>
                     </form>
                 </div>
             </div>

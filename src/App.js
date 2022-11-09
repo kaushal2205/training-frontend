@@ -13,6 +13,7 @@ import Logout from './Components/Logout.js';
 import ViewLoans from './Components/ViewLoans';
 import ViewItems from './Components/ViewItems';
 import ApplyLoan from './Components/ApplyLoan';
+import HomePage from './Components/HomePage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -35,6 +36,7 @@ function App() {
         <Navbar/>
         <div className='container'>
         <Switch>
+          <Route exact path='/' component={HomePage}/>
           <Route exact path='/dashboard' component={Dashboard}></Route>
           <Route exact path='/login' component={Login}></Route>  
           <Route exact path='/register' component={Register}></Route>

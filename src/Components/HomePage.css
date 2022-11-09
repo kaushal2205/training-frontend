@@ -1,0 +1,25 @@
+.home-main{
+    display: flex;
+    align-items: center;
+    gap:3rem;
+    padding: 0 5rem 0 0;
+}
+
+.home-img{
+    width:700px;
+    border-radius: 10px;
+    height:500px;
+}
+
+.home-main-text-div{
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+}
+
+.home-main-text{
+    text-align: left;
+    font-size: 1.3rem;
+    font-style: italic;
+    color:blueviolet;
+}
