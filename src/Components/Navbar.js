@@ -1,12 +1,18 @@
 import React from "react";
 
 import { withRouter } from 'react-router-dom'
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 
 import AuthenticationService from "../Services/AuthenticationService";
 
 const Navbar= () => {
+    const history = useHistory();
     const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+
+    const handleLogout = ()=>{
+        AuthenticationService.logout();
+    }
     return ( 
         <>
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style={{justifyContent:"space-around"}}>
@@ -31,7 +37,7 @@ const Navbar= () => {
                     </li>}
                     {isUserLoggedIn && 
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="/logout">Logout</a>
+                        <a class="nav-link" href="/" onClick={handleLogout}>Logout</a>
                     </li>}
                 </ul>
             </div>

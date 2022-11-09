@@ -1,6 +1,7 @@
-import React,{Component} from "react";
+import React,{Component, useState} from "react";
 import './login.css';
 import AuthenticationService from "../Services/AuthenticationService";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const required = (value) => {
     if (!value) {
@@ -12,89 +13,65 @@ const required = (value) => {
     }
   };
 
-export default class Login extends Component{
+const Login = ()=>{
 
-    constructor(props) {
-        super(props)
- 
-        this.state = {
-            email: '',
-            password: '',
-            hasLoginFailed: false,
-            showSuccessMessage: false
-        }
-        this.handleChange=this.handleChange.bind(this);
-        this.checkLogin=this.checkLogin.bind(this);
-    }
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [hasLoginFailed, setHasLoginFailed] = useState(false);
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-    handleChange(event) {
-        this.setState(
-            {
-                [event.target.name]
-                    : event.target.value
-            }
-        )
-    }
+    const history = useHistory();
     
-    checkLogin(p){
+    const checkLogin = (p)=>{
         p.preventDefault();
-        let employee={email:this.state.email, password:this.state.password};
-        console.log(JSON.stringify("Employee :",employee));
+        let employee={email:email, password:password};
+        console.log(JSON.stringify(employee));
        
         AuthenticationService.loginEmployee(employee).then(response => {
             console.log(response);
             if(response.data){
-                this.setState({showSuccessMessage:true})
-                this.setState({hasLoginFailed:false})
+                setShowSuccessMessage(true);
+                setHasLoginFailed(false);
 
-                AuthenticationService.registerSuccessfulLogin(this.state.email,this.state.password);
-
-                this.props.history.push('/dashboard')
+                AuthenticationService.registerSuccessfulLogin(email,password);
+                history.push('/dashboard')
             }else{
-                // this.setState({ showSuccessMessage: false })
-                // this.setState({ hasLoginFailed: true })
-                this.setState({showSuccessMessage:true})
-                this.setState({hasLoginFailed:false})
-                this.props.history.push('/dashboard');
+                setShowSuccessMessage(false);
+                setHasLoginFailed(true);
             }
         }).catch(() => {
-            // this.setState({ showSuccessMessage: false })
-            // this.setState({ hasLoginFailed: true })
-            this.setState({showSuccessMessage:true})
-            this.setState({hasLoginFailed:false})
-            this.props.history.push('/dashboard');
-           
-        });
+            setShowSuccessMessage(false);
+            setHasLoginFailed(true);           
+        })
     }
 
-    render(){
-        return(
-            <div> 
-                <div className="container">
-                    <form className="form-signin">
-                    <h1 className="form-signin-heading">Employee Login</h1>
-                    {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid Credentials</div>}
-                    {this.state.showSuccessMessage && <div>Login Sucessful</div>}
-                    <div className="form-register-main">
-                        <div className = "form-group">
-                            <label>User Name:</label>  
-                            <input type="text" name="email" className="form-control" value={this.state.email}
-                            onChange={this.handleChange} validations={[required]} />
-                        </div>
-                        <div className = "form-group">
-                        <label>Password:</label>
-                        <input type="password" name="password" className="form-control" value={this.state.password}
-                            onChange={this.handleChange} validations={[required]}/>
-                        </div>
-                        <button className="btn btn-lg btn-success" onClick={this.checkLogin}>Login</button>
-                        <div className="form-group">
-                            Cannot log-in? <a href="/register">Register</a>
-                        </div>
+    return(
+        <div> 
+            <div className="container">
+                <form className="form-signin">
+                <h1 className="form-signin-heading">Employee Login</h1>
+                {hasLoginFailed && <div className="alert alert-warning">Invalid Credentials</div>}
+                {showSuccessMessage && <div>Login Sucessful</div>}
+                <div className="form-register-main">
+                    <div className = "form-group">
+                        <label>Email:</label>  
+                        <input type="text" name="email" className="form-control" value={email}
+                        onChange={(e)=>{setEmail(e.target.value)}} validations={[required]} />
                     </div>
-                    </form>
+                    <div className = "form-group">
+                    <label>Password:</label>
+                    <input type="password" name="password" className="form-control" value={password}
+                        onChange={(e)=>{setPassword(e.target.value)}} validations={[required]}/>
+                    </div>
+                    <button className="btn btn-lg btn-success" onClick={checkLogin}>Login</button>
+                    <div className="form-group">
+                        Cannot log-in? <a href="/register">Register</a>
+                    </div>
                 </div>
+                </form>
             </div>
-        );
-    }
-   
+        </div>
+    )
 }
+
+export default Login;
