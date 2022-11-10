@@ -1,4 +1,5 @@
 import React,{useState} from "react";
+import axios from "axios";
 import './ApplyLoan.css';
 
 const ApplyLoan = ()=>{
@@ -6,16 +7,20 @@ const ApplyLoan = ()=>{
     const [employeeId, setEmployeeId] = useState("");
     const [itemCategory, setItemCategory] = useState("Furniture");
     const [itemDescription, setItemDescription] = useState("");
-    const [itemValue, setItemValue] = useState("");
+    const [itemValue, setItemValue] = useState(0);
     const [itemMake, setItemMake] = useState("Wooden");
 
     const handleApplyLoan = (e)=>{
         e.preventDefault();
-        console.log("EID",employeeId);
-        console.log("Category",itemCategory);
-        console.log("Description",itemDescription);
-        console.log("Value",itemValue);
-        console.log("Make",itemMake);
+        let data={ empId:employeeId,descption:itemDescription,category:itemCategory,make:itemMake,value:itemValue};
+        console.log(JSON.stringify(data));
+
+        const registerLoan = async()=>{
+            const res = await axios.post('http://localhost:8082/rockblack/api/master',data);
+            console.log(res);
+        }
+        
+        registerLoan();
 
     }
 
@@ -51,7 +56,7 @@ const ApplyLoan = ()=>{
             </div>
             <div class="form-group">
                 <label className="apply-loan-row-label">Item Value</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" 
+                <input type="number" class="form-control" id="exampleFormControlInput1" 
                     value={itemValue}
                     onChange={(e)=>{setItemValue(e.target.value)}}
                 />
