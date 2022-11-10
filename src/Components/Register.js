@@ -2,6 +2,9 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import AuthenticationService from "../Services/AuthenticationService";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 import './Register.css';
 
 const Register = ()=>{
@@ -13,8 +16,8 @@ const Register = ()=>{
     const [designation,setDesignation]=useState("");
     const [department,setDepartment]=useState("");
     const [gender,setGender]=useState('');
-    const [dob,setDob]=useState("");
-    const [doj,setDoj]=useState("");
+    const [dob,setDob]=useState(new Date());
+    const [doj,setDoj]=useState(new Date());
     const [confirmPass, setConfirmPass] = useState("");
     const [passwordFlag, setPasswordFlag] = useState(false);
     const history = useHistory();
@@ -58,11 +61,11 @@ const Register = ()=>{
                         <div className="register-form-row">
                             <div className = "form-group">
                                 <label>Email:</label>  
-                                <input type="text" name="email" className="form-control" value={email}
+                                <input type="email" name="email" className="form-control" value={email}
                                 onChange={(e)=>{setEmail(e.target.value)}} />
                             </div>
                             <div className = "form-group">
-                                <label>Fisrt Name:</label>  
+                                <label>First Name:</label>  
                                 <input type="text" name="email" className="form-control" value={fname}
                                 onChange={(e)=>{setFname(e.target.value)}} />
                             </div>
@@ -88,21 +91,23 @@ const Register = ()=>{
                             </div>
                             <div className = "form-group">
                                 <label>Gender:</label>  
-                                <input type="text" name="email" className="form-control" value={gender}
-                                onChange={(e)=>{setGender(e.target.value)}} />
+                                <select class="form-control"  value={gender} 
+                                    onChange={(e)=>{setGender(e.target.value)}}>
+                                    <option selected>M</option>
+                                    <option>F</option>
+                                    <option>O</option>
+                                </select>
                             </div>
                         </div>
 
                         <div className="register-form-row">
                             <div className = "form-group">
                                 <label>Date of birth:</label>  
-                                <input type="text" name="email" className="form-control" value={dob}
-                                onChange={(e)=>{setDob(e.target.value)}} />
+                                <DatePicker selected={dob} onChange={(date:Date) => setDob(date)} dateFromat='YYYY-MM-dd'/>
                             </div>
                             <div className = "form-group">
                                 <label>Date of joining:</label>  
-                                <input type="text" name="email" className="form-control" value={doj}
-                                onChange={(e)=>{setDoj(e.target.value)}} />
+                                <DatePicker selected={doj} onChange={(date:Date) => setDoj(date)} />
                             </div>
                         </div>
 
