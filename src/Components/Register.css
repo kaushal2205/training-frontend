@@ -1,0 +1,13 @@
+.register-form-row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-register{
+    max-width: 50vw;
+    padding: 15px 35px 45px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,0.1);  
+    box-shadow: 15px 35px 45px rgb(70, 3, 60);
+}

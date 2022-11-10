@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import AuthenticationService from "../Services/AuthenticationService";
+import './Register.css';
+
 const Register = ()=>{
 
     const [email, setEmail] = useState("");
@@ -49,20 +51,23 @@ const Register = ()=>{
 
     return(
         <div>   {passwordFlag && <h3 style={{'color':'red'}}>Password does not match</h3>}
-                <div className="container">
-                    <form className="form-signin">
+                <div className="register-container">
+                    <form className="form-register">
                     <h1 className="form-signin-heading">Employee Registration</h1>
                     <div className="form-register-main">
-                        <div className = "form-group">
-                            <label>Email:</label>  
-                            <input type="text" name="email" className="form-control" value={email}
-                            onChange={(e)=>{setEmail(e.target.value)}} />
+                        <div className="register-form-row">
+                            <div className = "form-group">
+                                <label>Email:</label>  
+                                <input type="text" name="email" className="form-control" value={email}
+                                onChange={(e)=>{setEmail(e.target.value)}} />
+                            </div>
+                            <div className = "form-group">
+                                <label>Fisrt Name:</label>  
+                                <input type="text" name="email" className="form-control" value={fname}
+                                onChange={(e)=>{setFname(e.target.value)}} />
+                            </div>
                         </div>
-                        <div className = "form-group">
-                            <label>Fisrt Name:</label>  
-                            <input type="text" name="email" className="form-control" value={fname}
-                            onChange={(e)=>{setFname(e.target.value)}} />
-                        </div>
+                        <div className="register-form-row">
                         <div className = "form-group">
                             <label>Last Name:</label>  
                             <input type="text" name="email" className="form-control" value={lname}
@@ -73,46 +78,56 @@ const Register = ()=>{
                             <input type="text" name="email" className="form-control" value={designation}
                             onChange={(e)=>{setDesignation(e.target.value)}} />
                         </div>
+                        </div>
                         
-                        <div className = "form-group">
-                            <label>Department:</label>  
-                            <input type="text" name="email" className="form-control" value={department}
-                            onChange={(e)=>{setDepartment(e.target.value)}} />
-                        </div>
-                        <div className = "form-group">
-                            <label>Gender:</label>  
-                            <input type="text" name="email" className="form-control" value={gender}
-                            onChange={(e)=>{setGender(e.target.value)}} />
-                        </div>
-                        <div className = "form-group">
-                            <label>Date of birth:</label>  
-                            <input type="text" name="email" className="form-control" value={dob}
-                            onChange={(e)=>{setDob(e.target.value)}} />
-                        </div>
-                        <div className = "form-group">
-                            <label>Date of joining:</label>  
-                            <input type="text" name="email" className="form-control" value={doj}
-                            onChange={(e)=>{setDoj(e.target.value)}} />
-                        </div>
-                        <div className = "form-group">
-                        <label>Password:</label>
-                        <input type="password" name="password" className="form-control" 
-                            style={{'margin':0}}
-                            value={password}
-                            onChange={(e)=>{setPassword(e.target.value)}} />
+                        <div className="register-form-row">
+                            <div className = "form-group">
+                                <label>Department:</label>  
+                                <input type="text" name="email" className="form-control" value={department}
+                                onChange={(e)=>{setDepartment(e.target.value)}} />
+                            </div>
+                            <div className = "form-group">
+                                <label>Gender:</label>  
+                                <input type="text" name="email" className="form-control" value={gender}
+                                onChange={(e)=>{setGender(e.target.value)}} />
+                            </div>
                         </div>
 
-                        <div className = "form-group">
-                            <label>Confirm Password:</label>
-                            <input type="text" name="password" className="form-control" value={confirmPass}
-                                onChange={(e)=>{setConfirmPass(e.target.value)}} />
+                        <div className="register-form-row">
+                            <div className = "form-group">
+                                <label>Date of birth:</label>  
+                                <input type="text" name="email" className="form-control" value={dob}
+                                onChange={(e)=>{setDob(e.target.value)}} />
+                            </div>
+                            <div className = "form-group">
+                                <label>Date of joining:</label>  
+                                <input type="text" name="email" className="form-control" value={doj}
+                                onChange={(e)=>{setDoj(e.target.value)}} />
+                            </div>
+                        </div>
+
+                        <div className="register-form-row">
+                            <div className = "form-group">
+                            <label>Password:</label>
+                            <input type="password" name="password" className="form-control" 
+                                style={{'margin':0}}
+                                value={password}
+                                onChange={(e)=>{setPassword(e.target.value)}} />
+                            </div>
+
+                            <div className = "form-group">
+                                <label>Confirm Password:</label>
+                                <input type="password" name="password" className="form-control" value={confirmPass}
+                                    onChange={(e)=>{setConfirmPass(e.target.value)}} />
+                            </div>
                         </div>
                     
                     <button className="btn btn-lg btn-success" onClick={handleRegister}>Register</button>
-                    </div>
-                     <div className="form-group">
+                    <div className="form-group-already">
                         Already Registered? <a href="/login">Login</a>
                      </div>
+                    </div>
+                     
                     </form>
                 </div>
             </div>
