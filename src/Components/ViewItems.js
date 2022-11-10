@@ -1,18 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import './ViewLoans.css';
 
 const ViewItems = ()=>{
 
-    let employeeId="12345678";
+    let employeeId = sessionStorage.getItem("EMPLOYEE_ID");
     let designation = "Manager";
     let department = "Marketing";
 
-    const displayRows =[
-        {id:"1001", description:"Tea Table ", make:"Wooden", category:"Furniture", valuation:"5000"},
-        {id:"1002", description:"Tea set ", make:"Glass", category:"Crockery", valuation:"2000"},
-        {id:"1003", description:"Dining Set ", make:"Wooden", category:"Furniture", valuation:"25000"},
-        {id:"1004", description:"Pen", make:"Plastic", category:"Furniture", valuation:"4000"}
-    ]
+    const [displayRows,setDisplayRows] = useState([]); 
+
+
+    useEffect(() => {
+        if (employeeId) {
+            const viewEmpItems = async()=>{
+                const res = await axios.post("http://localhost:8082/rockblack/api/findItemsByID", {empId: employeeId });
+                if(res.data){
+                    console.log(res.data);
+                    setDisplayRows(res.data);
+
+                }
+                else{
+                    console.log("Error, Could not fetch Purchased Items")
+                }
+            }
+
+            viewEmpItems();
+        
+        }
+    });
 
     return(
         <div className="ViewLoans-main">
@@ -47,11 +63,11 @@ const ViewItems = ()=>{
             <tbody>
                 {displayRows.map((row,index)=>(
                        <tr>
-                       <th scope="row">{row.id}</th>
-                       <td>{row.description}</td>
-                       <td>{row.make}</td>
-                       <td>{row.category}</td>
-                       <td>{row.valuation}</td>
+                       <th scope="row">{row.itemId}</th>
+                       <td>{row.itemDescription}</td>
+                       <td>{row.itemMake}</td>
+                       <td>{row.itemCategory}</td>
+                       <td>{row.itemValuation}</td>
                        </tr>
                 ))}
 

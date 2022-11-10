@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./ApplyLoan.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const ApplyLoan = () => {
-  const [employeeId, setEmployeeId] = useState("");
   const [itemCategory, setItemCategory] = useState("Furniture");
   const [itemDescription, setItemDescription] = useState("");
   const [itemValue, setItemValue] = useState("");
   const [itemMake, setItemMake] = useState("Wooden");
 
+  const history = useHistory();
+  let eId = sessionStorage.getItem("EMPLOYEE_ID");
+
   const handleApplyLoan = (e) => {
     e.preventDefault();
     let data = {
-      empId: employeeId,
+      empId: eId,
       description: itemDescription,
       category: itemCategory,
       make: itemMake,
@@ -25,7 +28,14 @@ const ApplyLoan = () => {
         "http://localhost:8082/rockblack/api/master",
         data
       );
-      console.log(res);
+      if(res.status=="200"){
+          console.log(res);
+          history.push("/dashboard");
+      }
+      else{
+          window.alert("Loan Application failed");
+      }
+      
     };
 
     registerLoan();
@@ -42,10 +52,8 @@ const ApplyLoan = () => {
               type="text"
               class="form-control"
               id="exampleFormControlInput1"
-              value={employeeId}
-              onChange={(e) => {
-                setEmployeeId(e.target.value);
-              }}
+              value={eId}
+              disabled
             />
           </div>
           <div class="form-group">
