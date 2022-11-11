@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./ApplyLoan.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import Swal from 'sweetalert2';
 
 const ApplyLoan = () => {
   const [itemCategory, setItemCategory] = useState("Furniture");
@@ -30,6 +31,11 @@ const ApplyLoan = () => {
       );
       if(res.status=="200"){
           console.log(res);
+          Swal.fire(
+            'Loan applied',
+            '',
+            'success'
+          )
           history.push("/dashboard");
       }
       else{
@@ -67,9 +73,9 @@ const ApplyLoan = () => {
                 setItemCategory(e.target.value);
               }}
             >
-              <option selected>Furniture</option>
-              <option>Stationery</option>
-              <option>Crockery</option>
+              <option selected value="Furniture">Furniture</option>
+              <option value="Stationery">Stationery</option>
+              <option value="Crockery">Crockery</option>
             </select>
           </div>
         </div>

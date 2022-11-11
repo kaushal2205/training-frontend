@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./Register.css";
+import Swal from 'sweetalert2';
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -45,6 +46,12 @@ const Register = () => {
         );
         console.log(res);
         if (res.data) {
+            Swal.fire(
+                'Employee Registered',
+                '',
+                'success'
+            )
+            history.push("/dashboard");
           history.push("/login");
         } else {
           console.log("Error, Unable to Register");
