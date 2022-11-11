@@ -19,12 +19,14 @@ class AuthenticationService {
   registerSuccessfulLogin(employee) {
     sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, employee.email);
     sessionStorage.setItem("EMPLOYEE_ID", employee.empId);
+    sessionStorage.setItem("DESIGNATION",employee.designation);
+    sessionStorage.setItem("DEPARTMENT",employee.dept);
     // console.log("First"+username);
   }
 
 
   logout() {
-    sessionStorage.removeItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
+    sessionStorage.clear();
   }
 
   isUserLoggedIn() {

@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./ViewLoans.css";
+import { useHistory } from "react-router-dom";
 
 const ViewLoans = () => {
   let employeeId = sessionStorage.getItem("EMPLOYEE_ID");
-  let designation = "Manager";
-  let department = "Marketing";
+  let designation = sessionStorage.getItem("DESIGNATION");
+  let department = sessionStorage.getItem("DEPARTMENT");
 
   useEffect(() => {
     if (employeeId) {
@@ -24,12 +25,15 @@ const ViewLoans = () => {
         viewEmpLoans();
       
     }
-  });
+  },[]);
 
+  const history = useHistory();
   const [displayRows, setDisplayRows] = useState([]);
 
 
   return (
+    <div className="ViewLoans-main-container">
+    <button type="button" class="btn btn-primary" style={{'width':'200px'}} onClick={()=>{ history.push('/dashboard');}}>Back to Dashboard</button>
     <div className="ViewLoans-main">
       <h3>Loan Cards Availed</h3>
       <div className="ViewLoans-header">
@@ -69,6 +73,7 @@ const ViewLoans = () => {
           ))}
         </tbody>
       </table>
+    </div>
     </div>
   );
 };

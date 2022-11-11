@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './ViewLoans.css';
+import { useHistory } from "react-router-dom";
 
 const ViewItems = ()=>{
 
     let employeeId = sessionStorage.getItem("EMPLOYEE_ID");
-    let designation = "Manager";
-    let department = "Marketing";
+    let designation = sessionStorage.getItem("DESIGNATION");
+    let department = sessionStorage.getItem("DEPARTMENT");
 
     const [displayRows,setDisplayRows] = useState([]); 
 
@@ -24,13 +25,15 @@ const ViewItems = ()=>{
                     console.log("Error, Could not fetch Purchased Items")
                 }
             }
-
-            viewEmpItems();
-        
+            viewEmpItems();        
         }
-    });
+    },[]);
+
+    const history = useHistory();
 
     return(
+        <div className="ViewLoans-main-container">
+        <button type="button" class="btn btn-primary" style={{'width':'200px'}} onClick={()=>{ history.push('/dashboard');}}>Back to Dashboard</button>    
         <div className="ViewLoans-main">
             <h3>Items Purchased</h3>
             <div className="ViewLoans-header">
@@ -74,6 +77,7 @@ const ViewItems = ()=>{
             </tbody>
             </table>
 
+        </div>
         </div>
     )
 

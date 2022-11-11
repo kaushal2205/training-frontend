@@ -9,7 +9,6 @@ import Navbar from './Components/Navbar';
 import Dashboard from './Components/Dashboard';
 import Login from './Components/Login';
 import Register from './Components/Register';
-import Logout from './Components/Logout.js';
 import ViewLoans from './Components/ViewLoans';
 import ViewItems from './Components/ViewItems';
 import ApplyLoan from './Components/ApplyLoan';
@@ -34,7 +33,7 @@ function App() {
     <div className="App">
       <Router>
         <Navbar/>
-        <div className='container'>
+        <div className='container-all'>
         <Switch>
           <Route exact path='/' component={HomePage}/>
           <Route exact path='/dashboard' component={Dashboard}></Route>
@@ -44,7 +43,6 @@ function App() {
           <Route exact path='/dashboard/viewItems' component={ViewItems}></Route>  
           <Route exact path='/dashboard/applyLoan' component={ApplyLoan}></Route>  
 
-          {/* <AuthenticatedRoute path='/logout' component={Logout}/>  */}
         </Switch>
         </div>
       </Router>

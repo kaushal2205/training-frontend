@@ -43,6 +43,8 @@ const ApplyLoan = () => {
 
   return (
     <>
+     <div className="ViewLoans-main-container">
+     <button type="button" class="btn btn-primary" style={{'width':'200px'}} onClick={()=>{ history.push('/dashboard');}}>Back to Dashboard</button>
       <form className="apply-loan-main">
         <h3>Select Product and Apply for Loan</h3>
         <div className="apply-loan-row">
@@ -66,7 +68,7 @@ const ApplyLoan = () => {
               }}
             >
               <option selected>Furniture</option>
-              <option>Stationary</option>
+              <option>Stationery</option>
               <option>Crockery</option>
             </select>
           </div>
@@ -130,6 +132,7 @@ const ApplyLoan = () => {
           </div>
         </div>
       </form>
+      </div>
     </>
   );
 };
